@@ -1,7 +1,11 @@
+import Head from "./components/Head";
+import GameBoard from "./components/GameBoard";
+
 export default function App() {
   return (
     <>
-      <h1>Hi There</h1>
+      <Head />
+      <GameBoard />
     </>
   );
 }
