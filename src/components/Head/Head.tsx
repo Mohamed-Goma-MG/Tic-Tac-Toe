@@ -1,14 +1,16 @@
+import style from "./style.module.css";
+
 export default function Head() {
   return (
-    <div className="head">
-      <div className="player-x">
+    <div className={style.head}>
+      <div className={`${style.player} ${style.playerX}`}>
         <span className="logo">X</span>
-        <span className="counter">0</span>
+        <span className={style.counter}>00</span>
       </div>
 
-      <div className="player-y">
-        <span className="logo">Y</span>
-        <span className="counter">0</span>
+      <div className={`${style.player} ${style.playerO}`}>
+        <span className="logo">O</span>
+        <span className={style.counter}>00</span>
       </div>
     </div>
   );

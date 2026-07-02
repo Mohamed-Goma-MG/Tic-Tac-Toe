@@ -1,0 +1,36 @@
+/* Head */
+.head {
+  display: flex;
+  background-color: var(--bg-dark);
+  margin: 30px auto;
+  width: fit-content;
+  border-radius: var(--br-sm);
+  box-shadow: 0 3px 10px var(--shadow-dark);
+  letter-spacing: 1.5px;
+  border: 2px solid var(--bg-med);
+}
+
+/* Player */
+.player {
+  padding: 8px 20px;
+}
+
+/* Player Counter */
+.player > .counter {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Player Logo */
+.player > span:first-of-type {
+  font-size: 35px;
+  margin-right: 10px;
+  font-weight: 800;
+  font-style: italic;
+}
+.playerX > span:first-child {
+  color: var(--x-color);
+}
+.playerO > span:first-child {
+  color: var(--o-color);
+}

@@ -1,0 +1,5 @@
+body {
+  color: var(--text-light);
+  background-color: var(--bg-med);
+  font-family: "poppins";
+}
