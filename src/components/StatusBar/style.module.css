@@ -1,13 +1,18 @@
-.currPlayer {
+/* Status Bar */
+.statusBar {
   text-transform: capitalize;
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* Current Player */
+.currPlayer {
   color: var(--text-med);
   font-size: 17px;
   letter-spacing: 1px;
   word-spacing: 2px;
   font-weight: 600;
-  text-align: center;
   font-style: italic;
-  margin: 40px 0;
 }
 .curr {
   font-size: 40px;
@@ -18,5 +23,17 @@
   color: var(--x-color);
 }
 .currO {
+  color: var(--o-color);
+}
+
+/* Winner */
+.winner {
+  font-size: 25px;
+  font-style: italic;
+}
+.winnerX {
+  color: var(--x-color);
+}
+.winnerO {
   color: var(--o-color);
 }
