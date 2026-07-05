@@ -1,16 +1,32 @@
-import { type ReactNode, useMemo } from "react";
-import { numberOfSquares } from "../../global";
 import Square from "./square";
 import style from "./style.module.css";
+import {
+  useGameActionsContext,
+  useGameContext,
+} from "../../contexts/GameContext";
+import squareClick from "../../logic/squareClick";
 
 export default function GameBoard() {
-  const squares: ReactNode[] = useMemo(() => {
-    const elements: ReactNode[] = [];
-    for (let i = 0; i < numberOfSquares; i++) {
-      elements.push(<Square key={i} holder="x" />);
-    }
-    return elements;
-  }, []);
+  const { squares, currPlayer, winner } = useGameContext();
+  const { setSquares, changeCurrPlayer, setWinner } = useGameActionsContext();
 
-  return <div className={style.board}>{squares}</div>;
+  function handleClick(i: number) {
+    squareClick({
+      i: i,
+      squares,
+      currPlayer,
+      winner,
+      setSquares,
+      changeCurrPlayer,
+      setWinner,
+    });
+  }
+
+  return (
+    <div className={style.board}>
+      {squares.map((v, i) => {
+        return <Square key={i} value={v} handleClick={() => handleClick(i)} />;
+      })}
+    </div>
+  );
 }

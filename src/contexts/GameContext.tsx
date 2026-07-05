@@ -8,41 +8,56 @@ import {
 import type { holder, players } from "../global";
 
 type GameContextOptions = {
-  currPlayer: holder;
+  squares: holder[];
+  currPlayer: players;
   xCounter: number;
   oCounter: number;
   winner: players | undefined;
 };
 
-type GameDispatchContextOptions = {
-  setCurrPlayer: (player: players) => void;
-  xIncreament: (n: number) => void;
-  oIncreament: (n: number) => void;
+type GameActionsContextOptions = {
+  setSquares: (s: holder[]) => void;
+  changeCurrPlayer: () => void;
+  xIncrement: (n: number) => void;
+  oIncrement: (n: number) => void;
+  setWinner: (w: players) => void;
 };
 
-const GameContext = createContext<GameContextOptions>({
-  currPlayer: undefined,
+const intialGameContext: GameContextOptions = {
+  squares: Array(9).fill(null),
+  currPlayer: "x",
   xCounter: 0,
   oCounter: 0,
   winner: undefined,
-});
+};
 
-const GameDispatchContext = createContext<GameDispatchContextOptions | null>(
+const GameContext = createContext<GameContextOptions | null>(null);
+
+const GameActionsContext = createContext<GameActionsContextOptions | null>(
   null,
 );
 
 function GameProvider({ children }: { children: ReactNode }) {
-  const [value, setValue] = useState(useGameContext());
-  const dispatch: GameDispatchContextOptions = useMemo(
+  const [value, setValue] = useState(intialGameContext);
+  const actions: GameActionsContextOptions = useMemo(
     () => ({
-      setCurrPlayer(player) {
-        setValue((g) => ({ ...g, currPlayer: player }));
+      setSquares(s) {
+        setValue((g) => ({ ...g, squares: s }));
       },
-      xIncreament(n) {
-        setValue((g) => ({ ...g, xCounter: n }));
+      changeCurrPlayer() {
+        setValue((g) => ({
+          ...g,
+          currPlayer: g.currPlayer === "x" ? "o" : "x",
+        }));
       },
-      oIncreament(n) {
-        setValue((g) => ({ ...g, xCounter: n }));
+      xIncrement() {
+        setValue((g) => ({ ...g, xCounter: ++g.xCounter }));
+      },
+      oIncrement() {
+        setValue((g) => ({ ...g, oCounter: ++g.oCounter }));
+      },
+      setWinner(w) {
+        setValue((g) => ({ ...g, winner: w }));
       },
     }),
     [],
@@ -50,20 +65,29 @@ function GameProvider({ children }: { children: ReactNode }) {
 
   return (
     <GameContext.Provider value={value}>
-      <GameDispatchContext.Provider value={dispatch}>
+      <GameActionsContext.Provider value={actions}>
         {children}
-      </GameDispatchContext.Provider>
+      </GameActionsContext.Provider>
     </GameContext.Provider>
   );
 }
 
-const useGameContext = () => useContext(GameContext);
-const useGameDispatchContext = () => useContext(GameDispatchContext);
+const useGameContext = () => {
+  const context = useContext(GameContext);
+  if (context === null) throw new Error("useGameContext is 'null'");
+  return context;
+};
+
+const useGameActionsContext = () => {
+  const context = useContext(GameActionsContext);
+  if (context === null) throw new Error("useGameActionsContext is 'null'");
+  return context;
+};
 
 export {
   GameContext,
-  GameProvider,
   useGameContext,
-  GameDispatchContext,
-  useGameDispatchContext,
+  GameProvider,
+  GameActionsContext,
+  useGameActionsContext,
 };

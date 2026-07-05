@@ -1,9 +1,14 @@
 import type { holder } from "../../global";
 
 type squareProps = {
-  holder?: holder;
+  value: holder;
+  handleClick: any;
 };
 
-export default function Square({ holder }: squareProps) {
-  return <div className="square">{holder}</div>;
+export default function Square({ value, handleClick }: squareProps) {
+  return (
+    <button className="square" onClick={handleClick}>
+      {value}
+    </button>
+  );
 }
