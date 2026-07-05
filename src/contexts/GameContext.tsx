@@ -19,8 +19,8 @@ type GameContextOptions = {
 type GameActionsContextOptions = {
   setSquares: (s: holder[]) => void;
   changeCurrPlayer: () => void;
-  xIncrement: (n: number) => void;
-  oIncrement: (n: number) => void;
+  xIncrement: () => void;
+  oIncrement: () => void;
   setWinner: (w: holder) => void;
 };
 
