@@ -1,12 +1,15 @@
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   width: 300px;
   aspect-ratio: 1/1;
   margin: auto;
-  background-color: var(--bg-dark);
-  border: 1px solid var(--bg-light);
+  border: 2px solid var(--bg-light);
   border-radius: var(--br-lg);
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  box-shadow: 0 0 30px 5px var(--shadow-dark);
 }
 .board > * {
   display: flex;
@@ -14,4 +17,12 @@
   justify-content: center;
   font-size: 40px;
   font-weight: 500;
+  color: white;
+  border: none;
+  background-color: transparent;
+  outline: 0.5px solid var(--bg-med);
+  transition: background-color 0.2s;
+}
+.board > *:hover {
+  background-color: #ffffff0a;
 }
