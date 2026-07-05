@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import type { holder, players } from "../global";
+import newGame from "../logic/newGame";
 
 type GameContextOptions = {
   squares: holder[];
@@ -20,7 +21,7 @@ type GameActionsContextOptions = {
   changeCurrPlayer: () => void;
   xIncrement: (n: number) => void;
   oIncrement: (n: number) => void;
-  setWinner: (w: players) => void;
+  setWinner: (w: holder) => void;
 };
 
 const intialGameContext: GameContextOptions = {
@@ -62,6 +63,11 @@ function GameProvider({ children }: { children: ReactNode }) {
     }),
     [],
   );
+
+  if (value.winner) {
+    const { setSquares, changeCurrPlayer, setWinner } = actions;
+    newGame({ setSquares, changeCurrPlayer, setWinner });
+  }
 
   return (
     <GameContext.Provider value={value}>
