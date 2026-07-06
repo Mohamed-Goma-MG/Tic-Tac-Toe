@@ -8,7 +8,8 @@ import squareClick from "../../logic/squareClick";
 
 export default function GameBoard() {
   const { squares, currPlayer, winner } = useGameContext();
-  const { setSquares, changeCurrPlayer, setWinner } = useGameActionsContext();
+  const { setSquares, changeCurrPlayer, setWinner, setIsGameFinished } =
+    useGameActionsContext();
 
   function handleClick(i: number) {
     squareClick({
@@ -19,6 +20,7 @@ export default function GameBoard() {
       setSquares,
       changeCurrPlayer,
       setWinner,
+      setIsGameFinished,
     });
   }
 

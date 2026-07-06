@@ -7,6 +7,7 @@ import {
 } from "react";
 import type { holder, players } from "../global";
 import newGame from "../logic/newGame";
+import counter from "../logic/counter";
 
 type GameContextOptions = {
   squares: holder[];
@@ -14,6 +15,7 @@ type GameContextOptions = {
   xCounter: number;
   oCounter: number;
   winner: players | undefined;
+  isGameFinished: boolean;
 };
 
 type GameActionsContextOptions = {
@@ -22,6 +24,7 @@ type GameActionsContextOptions = {
   xIncrement: () => void;
   oIncrement: () => void;
   setWinner: (w: holder) => void;
+  setIsGameFinished: (f: boolean) => void;
 };
 
 const intialGameContext: GameContextOptions = {
@@ -30,6 +33,7 @@ const intialGameContext: GameContextOptions = {
   xCounter: 0,
   oCounter: 0,
   winner: undefined,
+  isGameFinished: false,
 };
 
 const GameContext = createContext<GameContextOptions | null>(null);
@@ -60,13 +64,25 @@ function GameProvider({ children }: { children: ReactNode }) {
       setWinner(w) {
         setValue((g) => ({ ...g, winner: w }));
       },
+      setIsGameFinished(f) {
+        setValue((g) => ({ ...g, isGameFinished: f }));
+      },
     }),
     [],
   );
 
-  if (value.winner) {
-    const { setSquares, changeCurrPlayer, setWinner } = actions;
-    newGame({ setSquares, changeCurrPlayer, setWinner });
+  if (value.isGameFinished) {
+    const {
+      setSquares,
+      changeCurrPlayer,
+      setWinner,
+      xIncrement,
+      oIncrement,
+      setIsGameFinished,
+    } = actions;
+    newGame({ setSquares, changeCurrPlayer, setWinner, setIsGameFinished });
+
+    if (value.winner) counter({ winner: value.winner, xIncrement, oIncrement });
   }
 
   return (

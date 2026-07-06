@@ -9,6 +9,7 @@ type squareClickProps = {
   setSquares: (s: holder[]) => void;
   changeCurrPlayer: () => void;
   setWinner: (w: players) => void;
+  setIsGameFinished: (f: boolean) => void;
 };
 
 export default function squareClick({
@@ -19,6 +20,7 @@ export default function squareClick({
   setSquares,
   changeCurrPlayer,
   setWinner,
+  setIsGameFinished,
 }: squareClickProps) {
   if (squares[i] || winner) return;
 
@@ -32,6 +34,8 @@ export default function squareClick({
   if (theWinner) {
     console.log("winner is", theWinner);
     setWinner(theWinner);
+    setIsGameFinished(true);
+    return;
   }
 
   // Switch Player
