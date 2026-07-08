@@ -1,9 +1,18 @@
 import { useEffect, useRef } from "react";
 import type { players } from "../../global";
-import style from "./style.module.css";
+import theStyle from "./style.module.css";
 
-export default function WinnerPlayer({ player }: { player: players }) {
+export default function WinnerPlayer({ player }: { player: players | "tie" }) {
   let headRef = useRef<HTMLHeadingElement>(null);
+
+  const winningText = " is winner";
+
+  let { text: myText, style: mystyle } =
+    player == "x"
+      ? { text: player + winningText, style: theStyle.winnerX }
+      : player == "o"
+        ? { text: player + winningText, style: theStyle.winnerO }
+        : { text: "tie", style: theStyle.tie };
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -17,11 +26,8 @@ export default function WinnerPlayer({ player }: { player: players }) {
   }, []);
 
   return (
-    <h2
-      ref={headRef}
-      className={`${style.winner} ${player === "x" ? style.winnerX : style.winnerO}`}
-    >
-      {player} is winner
+    <h2 ref={headRef} className={mystyle}>
+      {myText}
     </h2>
   );
 }

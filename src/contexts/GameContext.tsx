@@ -14,16 +14,18 @@ type GameContextOptions = {
   currPlayer: players;
   xCounter: number;
   oCounter: number;
-  winner: players | undefined;
+  winner: winner;
   isGameFinished: boolean;
 };
+
+type winner = players | "tie" | undefined;
 
 type GameActionsContextOptions = {
   setSquares: (s: holder[]) => void;
   changeCurrPlayer: () => void;
   xIncrement: () => void;
   oIncrement: () => void;
-  setWinner: (w: holder) => void;
+  setWinner: (w: winner) => void;
   setIsGameFinished: (f: boolean) => void;
 };
 
@@ -82,7 +84,8 @@ function GameProvider({ children }: { children: ReactNode }) {
     } = actions;
     newGame({ setSquares, changeCurrPlayer, setWinner, setIsGameFinished });
 
-    if (value.winner) counter({ winner: value.winner, xIncrement, oIncrement });
+    if (value.winner && value.winner != "tie")
+      counter({ winner: value.winner, xIncrement, oIncrement });
   }
 
   return (

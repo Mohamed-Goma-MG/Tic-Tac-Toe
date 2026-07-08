@@ -37,3 +37,8 @@
 .winnerO {
   color: var(--o-color);
 }
+
+/* Tie */
+.tie {
+  color: orange;
+}
