@@ -1,17 +1,12 @@
-import type { holder, players } from "../global";
+import type { gameActions, playersObject, squaresObject } from "../type";
 import calcWinner from "./calcWinner";
 import isNoSquares from "./isNoSquares";
 
 type squareClickProps = {
   i: number;
-  squares: holder[];
-  currPlayer: players;
-  winner: players | undefined;
-  setSquares: (s: holder[]) => void;
-  changeCurrPlayer: () => void;
-  setWinner: (w: players | "tie") => void;
-  setIsGameFinished: (f: boolean) => void;
-};
+} & gameActions &
+  squaresObject &
+  playersObject;
 
 export default function squareClick({
   i,

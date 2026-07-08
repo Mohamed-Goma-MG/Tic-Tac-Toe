@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { players } from "../../global";
+import type { players } from "../../type";
 import theStyle from "./style.module.css";
 
 export default function WinnerPlayer({ player }: { player: players | "tie" }) {

@@ -1,4 +1,4 @@
-import type { holder } from "../../global";
+import type { holder } from "../../type";
 
 type squareProps = {
   value: holder;

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import style from "./style.module.css";
-import type { players } from "../../global";
+import type { players } from "../../type";
 
 export default function CurrPlayer({ player }: { player: players }) {
   return (

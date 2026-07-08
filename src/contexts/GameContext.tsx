@@ -5,29 +5,28 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { holder, players } from "../global";
+import type {
+  squaresProps,
+  squaresActions,
+  playersProps,
+  playersActions,
+  countersProps,
+  countersActions,
+  gameProps,
+  gameActions,
+} from "../type";
 import newGame from "../logic/newGame";
 import counter from "../logic/counter";
 
-type GameContextOptions = {
-  squares: holder[];
-  currPlayer: players;
-  xCounter: number;
-  oCounter: number;
-  winner: winner;
-  isGameFinished: boolean;
-};
+type GameContextOptions = squaresProps &
+  playersProps &
+  countersProps &
+  gameProps;
 
-type winner = players | "tie" | undefined;
-
-type GameActionsContextOptions = {
-  setSquares: (s: holder[]) => void;
-  changeCurrPlayer: () => void;
-  xIncrement: () => void;
-  oIncrement: () => void;
-  setWinner: (w: winner) => void;
-  setIsGameFinished: (f: boolean) => void;
-};
+type GameActionsContextOptions = squaresActions &
+  playersActions &
+  countersActions &
+  gameActions;
 
 const intialGameContext: GameContextOptions = {
   squares: Array(9).fill(null),
