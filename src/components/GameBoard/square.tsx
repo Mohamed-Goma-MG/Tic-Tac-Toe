@@ -2,7 +2,7 @@ import type { holder } from "../../global";
 
 type squareProps = {
   value: holder;
-  handleClick: any;
+  handleClick: () => void;
 };
 
 export default function Square({ value, handleClick }: squareProps) {
