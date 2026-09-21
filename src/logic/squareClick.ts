@@ -36,7 +36,7 @@ export default function squareClick({
 
   // On Tie
   if (isNoSquares(newArr)) {
-    newArr = Array(9).fill(undefined);
+    // newArr = Array(9).fill(undefined);
     setWinner("tie");
     setIsGameFinished(true);
     return;
