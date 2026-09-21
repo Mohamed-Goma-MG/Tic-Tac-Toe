@@ -1,4 +1,4 @@
-import type { holder } from "../global";
+import type { holder } from "../type";
 
 export default function isNoSquares(squares: holder[]) {
   let isThereNoSquares = true;
