@@ -6,4 +6,7 @@ import svgr from "vite-plugin-svgr";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), babel({ presets: [reactCompilerPreset()] }), svgr()],
+  server: {
+    port: process.env.PORT || 5173,
+  },
 });
